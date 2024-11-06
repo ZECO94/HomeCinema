@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Category>
+<h1>Category List</h1>
+<hr />
+<a asp-area="Admin" asp-action="Create" asp-controller="Category" class="btn btn-secondary"><i class="bi bi-plus-circle-fill"></i> Add</a>
+<hr />
+<table class="table table-hover table-bordered table-striped text-center">
+    <thead>
+        <tr class="table-dark">
+            <th scope="col">Category Name</th>
+            <th scope="col">Display Order</th>
+            <th scope="col">Description</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="table-active">
+                <th scope="row">@item.Name</th>
+                <td>@item.DisplayOrder</td>
+                <td>@item.Description</td>
+                <td>
+                    <a asp-area="Admin" asp-action="Edit" asp-controller="Category" asp-route-id="@item.Id" class=" btn btn-outline-warning"><i class="bi bi-pencil-square"></i></a>
+                    <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="@item.Id" data-name="@item.Name" title="Delete">
+                        <i class="bi bi-trash3-fill"></i>
+                    </button>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete the Category <strong id="categoryName"></strong>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a id="confirmDeleteButton" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var CategoryId = button.data('id'); // Extract info from data-* attributes
+            var Name = button.data('name');
+
+            var modal = $(this);
+            modal.find('.modal-body #categoryName').text(Name);
+            modal.find('.modal-footer #confirmDeleteButton').attr('href', '/Admin/Category/Delete/' + CategoryId);
+        });
+    </script>
+}

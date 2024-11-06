@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Movie>
+
+@{
+    // ViewData["Title"] = "Movies";
+    @* col-md-3 mb-4 d-flex align-items-stretch *@
+}
+
+<div class="container mt-4">
+    <div class="row">
+        @foreach (var movie in Model)
+        {
+            <div class="col-lg-3 col-sm-6">
+                <div class="row p-2">
+                  <div class="card border-0 p-3 shadow border-top border-5 rounded">
+                    <img src="~/imgs/@movie.ImgUrl" class="card-img-top rounded" alt="@movie.Name" style="height: 300px; object-fit: cover;">
+                    <div class="card-body pb0">
+                        <h5 class="card-title">@movie.Name</h5>
+                        @* <p class="card-text">
+                            @movie.Description
+                        </p> *@
+                        <p class="card-text">
+                            <small class="text-muted">Category: @movie.Category?.Name</small>
+                        </p>
+                        <p class="card-text">
+                            <strong>Price:</strong> @movie.Price LE
+                        </p>
+                        <p class="card-text">
+                            <strong>IMDB:</strong> @movie.Rate / 10
+                        </p>
+                        <a asp-action="Details" asp-route-id="@movie.Id" class="btn btn-primary bg-gradient border-0 form-control">View Details</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+

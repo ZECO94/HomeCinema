@@ -1,0 +1,88 @@
+﻿@using HomeCinema.Utility
+@model Movie
+<form method="post">
+    <div class="card shadow border-0 mt-4">
+        <div class="card-header bg-secondary bg-gradient text-light py-4">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white text-uppercase">@Model.Name</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="py-3">
+                <div class="row">
+                    <div class="col-6 col-md-2 offset-lg-1 pb-1">
+                        <a class="btn btn-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase"
+                           asp-action="Index">
+                            <small>Back to home</small>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-3 offset-lg-1 text-center mb-3">
+                        <img src="~/imgs/@Model.ImgUrl" width="100%" class="rounded" />
+                    </div>
+                    <div class="col-12 col-lg-6 offset-lg-1">
+
+                        <div class="col-12 col-md-6 pb-4">
+                            <span class="badge">@Model.Category.Name</span>
+                        </div>
+                        <div class="row ps-2">
+                            <h6 class="text-dark text-opacity-100 "><b>SN :</b> @Model.Code </h6>
+                        </div>
+                        <div class="row ps-2">
+                            <h6 class="text-dark text-opacity-100  pb-2">
+                                <b>List Price :</b> @Model.Price LE
+                            </h6>
+                        </div>
+                        <div class="row pl-2 my-3">
+                            <h6 class="text-dark text-opacity-100  pb-2"><b>Description :</b></h6>
+                            <p class="text-secondary lh-sm">@Model.Description</p>
+                        </div>
+                        <hr />
+                        <div class="row pl-2 my-3">
+                            <h6 class="text-dark text-opacity-100  pb-2"><b>Actors :</b></h6>
+                            <div class="row">
+                                @foreach (var actor in Model.Actors)
+                                {
+                                    <div class="col-4 col-md-3 text-center mb-4">
+                                        <img src="~/imgs/@actor.ImgUrl" alt="@actor.Name" class="img-fluid rounded-circle" width="100" height="100" />
+                                        <h6 class="mt-2">@actor.Name</h6>
+                                        <p class="text-muted">Age: @actor.Age</p>
+                                    </div>
+                                }
+                            </div>
+
+                        </div>
+                        <div class="col-12 col-md-6 pb-1">
+                            @if (Model.Status == MovieStatus.Avaliable)
+                            {
+                                <a class=" btn btn-success bg-gradient w-100 py-2 text-uppercase fw-semibold" asp-area="Customer" asp-action="Index" asp-controller="Cart" asp-route-id="@Model.Id">
+                                    <i class="bi bi-cart-plus-fill"></i> Avaliable
+                                </a>
+                                
+                            }
+                            else if (Model.Status == MovieStatus.Unavaliable)
+                            {
+                                <button type="submit" disabled
+                                        class="btn btn-outline-danger bg-gradient  w-100 py-2 text-uppercase fw-semibold">
+                                    <i class="bi bi-emoji-frown-fill"></i> Unavaliable
+                                </button>
+                                
+                            }
+                            else if (Model.Status == MovieStatus.Soon)
+                            {
+                                <button type="submit" disabled
+                                        class="btn btn-outline-secondary bg-gradient  w-100 py-2 text-uppercase fw-semibold">
+                                    <i class="bi bi-hourglass-split"></i> Soon
+                                </button>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
