@@ -39,6 +39,10 @@ namespace HomeCinema.Areas.Customer.Controllers
             ViewBag.Total = result.Sum(x => x.Count * x.Movie.Price);
             return View(result);
         }
+        public IActionResult Summary() 
+        {
+            return View();
+        }
         public IActionResult Increment(int id)
         {
             var cartItem = _unitOfWork.CartRepository.GetOne(c => c.Id == id);

@@ -23,5 +23,6 @@ namespace HomeCinema.Models
         public string ApplicationUserId { get; set;}
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
+        public Order? Order { get; set; }
     }
 }

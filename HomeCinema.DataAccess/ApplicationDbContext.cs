@@ -15,6 +15,9 @@ namespace HomeCinema.DataAccess
         public DbSet<Actor> Actors { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Cart> Cart { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetails> OrdersDetails { get; set; }
+
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
