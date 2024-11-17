@@ -15,11 +15,12 @@ namespace HomeCinema.Models
         public DateTime OrderDate { get; set; }
         public DateTime ShippingDate { get; set; }
         public double OrderTotal { get; set; }
-        public OrderStatus? OrderStatus { get; set; }
-        public PaymentStatus? PaymentStatus { get; set; }
+        public string? OrderStatus { get; set; }
+        public string? PaymentStatus { get; set; }
         public string? TrackingNumber { get; set; }
         public string? DelieveryContact { get; set; }
         public DateTime PaymentDate { get; set; }
+        public string? SessionId { get; set; }
         public string? PaymentIntentId { get; set; }
         public DateOnly PaymentDueDate { get; set; }
         public string Name { get; set; }

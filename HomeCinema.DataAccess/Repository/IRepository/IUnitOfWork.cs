@@ -15,6 +15,7 @@ namespace HomeCinema.DataAccess.Repository.IRepository
         IApplicationUserRepository ApplicationUserRepository { get; }
         IOrderRepository OrderRepository { get; }
         IOrderDetailsRepository OrderDetailsRepository { get; }
+        ICompanyRepository CompanyRepository { get; }
 
 
     }

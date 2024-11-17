@@ -17,11 +17,11 @@ namespace HomeCinema.Models
         [ForeignKey("Orer")]
         public int OrderId { get; set; }
         [ValidateNever]
-        public Order Order { get; set; }
+        public Order? Order { get; set; }
         [ForeignKey("Movie")]
         public int MovieId { get; set; }
         [ValidateNever]
-        public Movie Movie { get; set; }
+        public Movie? Movie { get; set; }
 
     }
 }

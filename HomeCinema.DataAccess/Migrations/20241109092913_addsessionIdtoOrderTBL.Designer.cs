@@ -4,6 +4,7 @@ using HomeCinema.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomeCinema.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241109092913_addsessionIdtoOrderTBL")]
+    partial class addsessionIdtoOrderTBL
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,76 +125,6 @@ namespace HomeCinema.DataAccess.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("HomeCinema.Models.Company", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PostalCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Companies");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "",
-                            City = "",
-                            Email = "",
-                            Name = "Com1",
-                            PhoneNumber = "",
-                            PostalCode = "",
-                            State = ""
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "",
-                            City = "",
-                            Email = "",
-                            Name = "Com2",
-                            PhoneNumber = "",
-                            PostalCode = "",
-                            State = ""
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Address = "",
-                            City = "",
-                            Email = "",
-                            Name = "Com3",
-                            PhoneNumber = "",
-                            PostalCode = "",
-                            State = ""
-                        });
-                });
-
             modelBuilder.Entity("HomeCinema.Models.Movie", b =>
                 {
                     b.Property<int>("Id")
@@ -265,8 +198,8 @@ namespace HomeCinema.DataAccess.Migrations
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("OrderStatus")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("OrderStatus")
+                        .HasColumnType("int");
 
                     b.Property<double>("OrderTotal")
                         .HasColumnType("float");
@@ -280,8 +213,8 @@ namespace HomeCinema.DataAccess.Migrations
                     b.Property<string>("PaymentIntentId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PaymentStatus")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("PaymentStatus")
+                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -557,9 +490,6 @@ namespace HomeCinema.DataAccess.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CompanyId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -569,8 +499,6 @@ namespace HomeCinema.DataAccess.Migrations
 
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
-
-                    b.HasIndex("CompanyId");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
@@ -705,15 +633,6 @@ namespace HomeCinema.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("HomeCinema.Models.ApplicationUser", b =>
-                {
-                    b.HasOne("HomeCinema.Models.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId");
-
-                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("HomeCinema.Models.Category", b =>

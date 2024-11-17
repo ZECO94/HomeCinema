@@ -9,6 +9,8 @@ namespace HomeCinema.DataAccess.Repository.IRepository
 {
     public interface IOrderRepository : IRepository<Order>
     {
+        void UpdateStatus(int id, string orderStatus, string? paymentStatus = null);
+        void UpdateStripePayment(int id, string seesionId, string paymentInrenId);
 
     }
 }

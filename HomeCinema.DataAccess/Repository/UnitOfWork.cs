@@ -17,6 +17,7 @@ namespace HomeCinema.DataAccess.Repository
         public IApplicationUserRepository ApplicationUserRepository { get; private set; }
         public IOrderDetailsRepository OrderDetailsRepository { get; private set; }
         public IOrderRepository OrderRepository { get; private set; }
+        public ICompanyRepository CompanyRepository { get; private set; }
 
 
         public UnitOfWork(ApplicationDbContext context)
@@ -29,6 +30,7 @@ namespace HomeCinema.DataAccess.Repository
             ApplicationUserRepository = new ApplicationUserRepository(_context);
             OrderDetailsRepository = new OdrerDetailsRepository(_context);
             OrderRepository = new OrderRepository(_context);
+            CompanyRepository = new CompanyRepository(_context);
         }
     }
 }
